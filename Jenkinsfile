@@ -3,8 +3,8 @@ pipeline {
     stages{
         stage('Init'){
             steps{
-                sh 'apk add docker || true'
-                sh 'apk add python || true'
+                sh 'sudo -S apt update %% sudo -S apt upgrade -y || true'
+                sh 'sudo -S apt install python2 docker || true'
                 //sh 'docker rm -f $(docker ps -qa) || true'
             }
         }
