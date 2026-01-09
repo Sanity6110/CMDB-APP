@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Deploy'){
             steps {
-                sh 'docker run -d --name python-app python-app:latest'
+                sh 'docker run -d -p 3306:3306 --name python-app python-app:latest'
             }
         }  
     }
