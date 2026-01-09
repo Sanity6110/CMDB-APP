@@ -3,7 +3,7 @@ pipeline {
     stages{
         stage('Init'){
             steps{
-                sh 'docker rm -f $(docker ps -qa) || true'
+                //sh 'docker rm -f $(docker ps -qa) || true'
             }
         }
         stage('Build'){
