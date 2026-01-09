@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Build'){
             steps {
-                sh 'docker build -t python-app Dockerfile.python .'
+                sh 'docker build -t python-app -f Dockerfile.python .'
             }
         }
         stage('Deploy'){
