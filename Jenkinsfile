@@ -3,7 +3,8 @@ pipeline {
     stages{
         stage('Init'){
             steps{
-                sh 'echo hello'
+                sh 'apk add docker || true'
+                sh 'apk add python || true'
                 //sh 'docker rm -f $(docker ps -qa) || true'
             }
         }
