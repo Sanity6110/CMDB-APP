@@ -3,6 +3,7 @@ pipeline {
     stages{
         stage('Init'){
             steps{
+                sh 'echo hello'
                 //sh 'docker rm -f $(docker ps -qa) || true'
             }
         }
