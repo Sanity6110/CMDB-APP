@@ -1,16 +1,20 @@
 pipeline {
     agent {label 'agent'}
     stages{
-        stage('Create MySQL DB and data'){
+        stage('Init'){
             steps{
-                sh "chmod +x createcmdb.py"
-                sh "./createcmdb.py"
+                sh "docker rm -f $(docker ps -qa) || true"
             }
         }
-        stage('Second Stage'){
+        stage('Build'){
             steps {
-                sh "pwd"
+                sh "docker build -t python-app Dockerfile.python ."
             }
         }
+        stage('Deploy'){
+            steps {
+                sh "docker run -d --name python-app python-app:latest"
+            }
+        }  
     }
 }
