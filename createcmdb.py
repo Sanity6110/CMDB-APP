@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import mysql
-from mysql import mysql.connector
 from mysql.connector import errorcode
 
 # Change these as needed
