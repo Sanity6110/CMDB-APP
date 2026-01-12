@@ -6,7 +6,7 @@ from mysql.connector import errorcode
 DB_CONFIG = {
     'user':     'root',
     'password': 'WjhQN70VBMSvmdrVkZl0@',
-    'host':     '127.0.0.1',
+    'host':     '172.18.0.2',
     'port':     3306,
     'ssl_disabled': True
 }

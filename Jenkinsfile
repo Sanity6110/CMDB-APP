@@ -3,9 +3,9 @@ pipeline {
     stages{
         stage('Init'){
             steps{
-                sh 'sudo -S apt update %% sudo -S apt upgrade -y || true'
-                sh 'sudo -S apt install python2 docker || true'
-                //sh 'docker rm -f $(docker ps -qa) || true'
+                sh 'docker network create MYsql || True'
+                sh 'docker rm -f pyton-app'
+                sh 'docker rmi -f python-app'
             }
         }
         stage('Build'){
@@ -13,10 +13,16 @@ pipeline {
                 sh 'docker build -t python-app -f Dockerfile.python .'
             }
         }
-        stage('Deploy'){
+        stage('Deploy Container'){
             steps {
-                sh 'docker run -d -p 3306:3306 --name python-app python-app:latest'
+                sh 'docker run -d -p 3306:3306 --netowork MYsql --name python-app python-app:latest'
             }
-        }  
+        }
+        stage('Deploy Webpage'){
+            steps{
+                sh 'sudo chmod +x phppage.sh || True'
+                sh 'sudo ./phppage.sh'
+            }
+        }
     }
 }
