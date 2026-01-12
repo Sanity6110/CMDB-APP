@@ -3,7 +3,7 @@ pipeline {
     stages{
         stage('Init'){
             steps{
-                sh 'docker network create MYsql || True'
+                sh 'docker network create MYsql || true'
                 sh 'docker rm -f pyton-app'
                 sh 'docker rmi -f python-app'
             }
@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Deploy Webpage'){
             steps{
-                sh 'sudo chmod +x phppage.sh || True'
+                sh 'sudo chmod +x phppage.sh || true'
                 sh 'sudo ./phppage.sh'
             }
         }
