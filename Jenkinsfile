@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Deploy Container'){
             steps {
-                sh 'docker run -d -p 3306:3306 --netowork MYsql --name python-app python-app:latest'
+                sh 'docker run -d -p 3306:3306 --network MYsql --name python-app python-app:latest'
             }
         }
         stage('Deploy Webpage'){
