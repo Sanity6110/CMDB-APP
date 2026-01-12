@@ -20,8 +20,8 @@ pipeline {
         }
         stage('Deploy Webpage'){
             steps{
-                sh 'sudo -s chmod +x phppage.sh || true'
-                sh 'sudo -s ./phppage.sh'
+                sh 'sudo -S chmod +x phppage.sh || true'
+                sh 'sudo -S ./phppage.sh'
             }
         }
     }
