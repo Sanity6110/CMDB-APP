@@ -4,7 +4,7 @@ pipeline {
         stage('Init'){
             steps{
                 sh 'docker network create MYsql || true'
-                sh 'docker rm -f pyton-app'
+                sh 'docker rm -f python-app'
                 sh 'docker rmi -f python-app'
             }
         }
