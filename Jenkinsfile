@@ -20,8 +20,10 @@ pipeline {
         }
         stage('Deploy Webpage'){
             steps{
-                sh 'sudo -S chmod +x phppage.sh || true'
-                sh 'sudo -S ./phppage.sh'
+                sh '''
+                   sudo -S chmod +x phppage.sh || true
+                   sudo -S MYSQL_ROOT_PW='WjhQN70VBMSvmdrVkZl0@' ./phppage.sh
+                '''
             }
         }
     }
