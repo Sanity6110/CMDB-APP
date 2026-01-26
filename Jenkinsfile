@@ -6,9 +6,11 @@ pipeline {
                 sh '''
                 docker network create MYsql || true
                 docker rm -f python-app || true
+                docker rm -f mysql || true
                 docker rm -f phpadmin || true
                 docker rmi -f python-app || true
                 docker rmi -f phpadmin || true
+                docker rmi -f mysql || true
                 '''
             }
         }
