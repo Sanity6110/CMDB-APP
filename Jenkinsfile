@@ -24,6 +24,11 @@ pipeline {
                 sh 'docker run --name mysql --network MYsql -e MYSQL_ROOT_PASSWORD=WjhQN70VBMSvmdrVkZl0@ -d mysql:8.3 --default-authentication-plugin=mysql_native_password'
             }
         }
+        stage('Sleep 1 Minute'){
+            steps{
+                sh 'sleep 1m'
+            }
+        }
         stage('Deploy Python Container'){
             steps{
                 sh 'docker run -d --network MYsql --name python-app python-app:latest'
