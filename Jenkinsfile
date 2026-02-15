@@ -39,5 +39,25 @@ pipeline {
                 sh 'docker run -d -p 80:80 --network MYsql --name phpadmin -e PMA_HOST=mysql -e PMA_PORT=3306 phpmyadmin/phpmyadmin '
             }
         }
+        stage('Test Containers Are Running') {
+            steps {
+                sh '''
+                # Check MySQL is running
+                    if [ "$(docker inspect -f '{{.State.Running}}' mysql)" != "true" ]; then
+                        echo "MySQL container is NOT running!"
+                        exit 1
+                    fi
+
+                # Check phpMyAdmin is running
+                    if [ "$(docker inspect -f '{{.State.Running}}' phpadmin)" != "true" ]; then
+                        echo "phpMyAdmin container is NOT running!"
+                        exit 1
+                    fi
+
+                # Python app is intentionally NOT checked, as this will stop one it has deployed into the MySQL container.
+                echo "MySQL and phpMyAdmin are healthy."
+                 '''
+            }
+        }
     }
 }
