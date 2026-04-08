@@ -1,6 +1,14 @@
 pipeline {
     agent {label 'agent'}
+    environment{
+        WORKDIR = 'Monitoring'
+    }
     stages{
+        stage('Change Directory to where Compose file is located'){
+            steps{
+                sh 'cd $WORKDIR'
+            }
+        }
         stage('Build Docker stack'){
             steps {
                 sh 'docker compose up'
