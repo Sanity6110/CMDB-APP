@@ -3,7 +3,7 @@ pipeline {
     stages{
         stage('Build Docker stack'){
             steps {
-                sh 'docker compose up -d'
+                sh 'docker compose up'
             }
         }
         stage('Test Containers Are Running') {
