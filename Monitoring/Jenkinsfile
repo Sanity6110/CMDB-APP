@@ -7,7 +7,7 @@ pipeline {
         stage('Build Docker stack'){
             steps {
                 dir("${env.WORKDIR}") {
-                    sh 'docker compose up'
+                    sh 'docker compose up -d'
                 }
             }
         }
