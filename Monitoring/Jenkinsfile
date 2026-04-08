@@ -1,43 +1,41 @@
 pipeline {
     agent {label 'agent'}
     environment{
-        WORKDIR = 'Monitoring/Monitoring'
+        WORKDIR = 'Monitoring'
     }
     stages{
-        stage('Change Directory to where Compose file is located'){
-            steps{
-                sh 'cd $WORKDIR'
-                sh 'ls'
-            }
-        }
         stage('Build Docker stack'){
             steps {
-                sh 'docker compose up'
+                dir("${env.WORKDIR}") {
+                    sh 'docker compose up'
+                }
             }
         }
         stage('Test Containers Are Running') {
             steps {
-                sh '''
-                # Check prometheus is running
-                    if [ "$(docker inspect -f '{{.State.Running}}' prometheus)" != "true" ]; then
-                        echo "prometheus container is NOT running!"
-                        exit 1
-                    fi
+                dir("${env.WORKDIR}") {
+                    sh '''
+                    # Check prometheus is running
+                        if [ "$(docker inspect -f '{{.State.Running}}' prometheus)" != "true" ]; then
+                            echo "prometheus container is NOT running!"
+                            exit 1
+                        fi
 
-                # Check cadvisor is running
-                    if [ "$(docker inspect -f '{{.State.Running}}' cadvisor)" != "true" ]; then
-                        echo "cadvisor container is NOT running!"
-                        exit 1
-                    fi
+                    # Check cadvisor is running
+                        if [ "$(docker inspect -f '{{.State.Running}}' cadvisor)" != "true" ]; then
+                            echo "cadvisor container is NOT running!"
+                            exit 1
+                        fi
 
-                # Check node-exporter is running
-                    if [ "$(docker inspect -f '{{.State.Running}}' node-exporter)" != "true" ]; then
-                        echo "node-exporter container is NOT running!"
-                        exit 1
-                    fi
+                    # Check node-exporter is running
+                        if [ "$(docker inspect -f '{{.State.Running}}' node-exporter)" != "true" ]; then
+                            echo "node-exporter container is NOT running!"
+                            exit 1
+                        fi
 
-                echo "node-exporter, cAdvisor and prometheus are healthy."
-                 '''
+                    echo "node-exporter, cAdvisor and prometheus are healthy."
+                    '''
+                }
             }
         }
     }
