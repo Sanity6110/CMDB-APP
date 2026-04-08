@@ -1,13 +1,6 @@
 pipeline {
     agent {label 'agent'}
     stages{
-         stage('Checkout'){
-            steps{
-                sh '''
-                    checkout scm
-                '''
-            }
-         }
         stage('Build Docker stack'){
             steps {
                 sh 'docker compose up -d'
