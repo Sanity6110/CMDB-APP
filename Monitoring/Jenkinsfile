@@ -1,12 +1,12 @@
 pipeline {
     agent {label 'agent'}
     environment{
-        WORKDIR = 'Monitoring'
+        WORKDIR = 'Monitoring/Monitoring'
     }
     stages{
         stage('Change Directory to where Compose file is located'){
             steps{
-                sh 'cd /$WORKDIR'
+                sh 'cd $WORKDIR'
                 sh 'ls'
             }
         }
