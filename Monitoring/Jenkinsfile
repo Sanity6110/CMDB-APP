@@ -1,16 +1,8 @@
 pipeline {
     agent any
     environment {
-        STACK_DIR = '/opt/stacks/monitoring'
     }
     stages{
-        stage('cd into working dir'){
-            steps{
-                sh '''
-                    cd ${STACK_DIR}
-                '''
-            }
-        }
          stage('Checkout'){
             steps{
                 sh '''
