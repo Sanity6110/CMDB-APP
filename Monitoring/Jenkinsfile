@@ -1,7 +1,5 @@
 pipeline {
-    agent any
-    environment {
-    }
+    agent {label 'agent'}
     stages{
          stage('Checkout'){
             steps{
