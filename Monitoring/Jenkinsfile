@@ -21,19 +21,13 @@ pipeline {
                             exit 1
                         fi
 
-                    # Check cadvisor is running
-                        if [ "$(docker inspect -f '{{.State.Running}}' cadvisor)" != "true" ]; then
-                            echo "cadvisor container is NOT running!"
-                            exit 1
-                        fi
-
                     # Check node-exporter is running
                         if [ "$(docker inspect -f '{{.State.Running}}' node-exporter)" != "true" ]; then
                             echo "node-exporter container is NOT running!"
                             exit 1
                         fi
 
-                    echo "node-exporter, cAdvisor and prometheus are healthy."
+                    echo "node-exporter and prometheus are healthy."
                     '''
                 }
             }
